@@ -1,9 +1,10 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:reno_bar/dino_game.dart';
 
 void main() {
 
-  final game = FlameGame();
+  final game = DinoGame();
   runApp(
     GameWidget(game: game,),
   );

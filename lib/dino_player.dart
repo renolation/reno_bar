@@ -1,6 +1,5 @@
 
 
-
 import 'package:flame/components.dart';
 
 class DinoPlayer extends SpriteComponent with HasGameRef {
@@ -10,7 +9,7 @@ class DinoPlayer extends SpriteComponent with HasGameRef {
  @override
   Future<void> onLoad() async {
    super.onLoad();
-   sprite = await gameRef.loadSprite('assets/Saw.png');
-   position = gameRef.size /2 ;
+   sprite = await gameRef.loadSprite('Saw.png');
+   position = gameRef.size /3 ;
  }
 }
