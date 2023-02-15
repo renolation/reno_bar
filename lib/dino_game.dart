@@ -9,6 +9,7 @@ import 'package:reno_bar/bar_center.dart';
 import 'package:reno_bar/dino_player.dart';
 import 'package:reno_bar/dino_world.dart';
 import 'package:reno_bar/enemy.dart';
+import 'package:reno_bar/enemy_manager.dart';
 
 class DinoGame extends FlameGame with HasTappables {
   final DinoPlayer dinoPlayer = DinoPlayer();
@@ -16,6 +17,10 @@ class DinoGame extends FlameGame with HasTappables {
    final BarCenter barCenter = BarCenter();
    final BarLeft barLeft = BarLeft();
    final BarRight barRight = BarRight();
+
+  late EnemyManager _enemyManager;
+
+
   @override
   Future<void> onLoad() async {
     super.onLoad();
@@ -24,17 +29,14 @@ class DinoGame extends FlameGame with HasTappables {
     await add(barLeft);
     await add(barRight);
 
-   await add(Enemy(
-     sprite: await loadSprite('Saw.png'),
-     size: Vector2(64,64),
-     position: Vector2(dinoWorld.size.x/2, 0),
-   )..anchor = Anchor.topCenter);
+
 
     camera.followComponent(
       dinoPlayer,
       worldBounds: Rect.fromLTRB(0, 0, dinoWorld.size.x, dinoWorld.size.y),
     );
-
+    _enemyManager = EnemyManager();
+    add(_enemyManager);
   }
 
 
