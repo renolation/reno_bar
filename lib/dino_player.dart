@@ -10,25 +10,19 @@ import 'dino_game.dart';
 
 class DinoPlayer extends SpriteComponent with HasGameRef<DinoGame>, Tappable {
 
-  DinoPlayer() : super(size: Vector2.all(100));
+  DinoPlayer() : super();
 
  @override
   Future<void> onLoad() async {
    super.onLoad();
    sprite = await gameRef.loadSprite('Barrel (1).png');
-   // position = gameRef.size /3 ;
-   // position = Vector2(0, 0);
+   size = sprite!.originalSize/2;
+
  }
 
  @override
  bool onTapDown(TapDownInfo info) {
     // TODO: implement onTapDown
-    // print('dino');
-    // print(info.eventPosition.viewport);
-    // print(info.eventPosition.game);
-    // print(info.eventPosition.global);
-    // print(info.eventPosition.widget);
-    // print(info.handled);
    info.handled = true;
     return true;
   }
@@ -38,12 +32,6 @@ class DinoPlayer extends SpriteComponent with HasGameRef<DinoGame>, Tappable {
     info.handled = true;
     return true;
   }
-
-
- // @override
- // void onLongTapDown(TapDownEvent event){
- //  print('long tap down');
- // }
 
 
 }

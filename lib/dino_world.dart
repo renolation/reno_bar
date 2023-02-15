@@ -6,7 +6,7 @@ class DinoWorld extends SpriteComponent with HasGameRef {
   Future<void> onLoad() async {
     super.onLoad();
     sprite = await gameRef.loadSprite('background.jpg');
-    // size = sprite!.originalSize;
     size = gameRef.size;
+    print('size world ${size.x} ${size.y}');
   }
 }

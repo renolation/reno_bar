@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
 import 'package:flame/experimental.dart';
@@ -19,30 +20,27 @@ class DinoGame extends FlameGame with HasTappables {
     super.onLoad();
     await add(dinoWorld);
     await add(dinoPlayer);
-    // await add(_barCenter);
     await add(barLeft);
     await add(barRight);
-    dinoPlayer.position =
-        Vector2(dinoWorld.size.x / 2.5, dinoWorld.size.y / 1.3);
+
+    dinoPlayer.anchor = Anchor.bottomCenter;
+    dinoPlayer.position = Vector2(dinoWorld.size.x/2, dinoWorld.size.y * 14 / 15);
+
     camera.followComponent(
       dinoPlayer,
       worldBounds: Rect.fromLTRB(0, 0, dinoWorld.size.x, dinoWorld.size.y),
     );
+
   }
 
-  void test(){
-    print('test');
-  }
 
   @override
   void onTapUp(int pointerId, TapUpInfo info) {
     super.onTapUp(pointerId, info);
     if (info.handled) {
-      print('up');
       if(children.contains(barCenter)){
         barCenter.add(RemoveEffect(delay: 0));
       }
-
       if(!(children.contains(barLeft) || children.contains(barRight))){
         add(barLeft);
         add(barRight);
@@ -54,7 +52,6 @@ class DinoGame extends FlameGame with HasTappables {
   void onTapDown(int pointerId, TapDownInfo info) {
     super.onTapDown(pointerId, info);
     if (info.handled) {
-      print('down');
       RemoveEffect effect = RemoveEffect(delay: 0);
       if(!children.contains(barCenter)){
         add(barCenter);
