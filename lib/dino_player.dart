@@ -10,13 +10,14 @@ import 'dino_game.dart';
 
 class DinoPlayer extends SpriteComponent with HasGameRef<DinoGame>, Tappable {
 
-  DinoPlayer() : super();
+  DinoPlayer() : super(anchor: Anchor.bottomCenter);
 
  @override
   Future<void> onLoad() async {
    super.onLoad();
    sprite = await gameRef.loadSprite('Barrel (1).png');
    size = sprite!.originalSize/2;
+   position = Vector2(gameRef.size.x/2, gameRef.size.y * 14 / 15);
 
  }
 

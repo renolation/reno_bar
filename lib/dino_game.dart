@@ -8,6 +8,7 @@ import 'package:flame/game.dart';
 import 'package:reno_bar/bar_center.dart';
 import 'package:reno_bar/dino_player.dart';
 import 'package:reno_bar/dino_world.dart';
+import 'package:reno_bar/enemy.dart';
 
 class DinoGame extends FlameGame with HasTappables {
   final DinoPlayer dinoPlayer = DinoPlayer();
@@ -23,8 +24,11 @@ class DinoGame extends FlameGame with HasTappables {
     await add(barLeft);
     await add(barRight);
 
-    dinoPlayer.anchor = Anchor.bottomCenter;
-    dinoPlayer.position = Vector2(dinoWorld.size.x/2, dinoWorld.size.y * 14 / 15);
+   await add(Enemy(
+     sprite: await loadSprite('Saw.png'),
+     size: Vector2(64,64),
+     position: Vector2(dinoWorld.size.x/2, 0),
+   )..anchor = Anchor.topCenter);
 
     camera.followComponent(
       dinoPlayer,
