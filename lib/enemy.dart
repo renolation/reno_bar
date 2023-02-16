@@ -29,7 +29,7 @@ class Enemy extends SpriteComponent with HasGameRef<DinoGame>, CollisionCallback
   @override
   void onMount() {
     super.onMount();
-    final shape = CircleHitbox.relative(1,  parentSize: size,
+    final shape = CircleHitbox.relative(0.8,  parentSize: size,
       position: size / 2,
       anchor: Anchor.center,);
     add(shape);
