@@ -11,7 +11,7 @@ import 'package:reno_bar/dino_world.dart';
 import 'package:reno_bar/enemy.dart';
 import 'package:reno_bar/enemy_manager.dart';
 
-class DinoGame extends FlameGame with HasTappables {
+class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
   final DinoPlayer dinoPlayer = DinoPlayer();
   final DinoWorld dinoWorld = DinoWorld();
    final BarCenter barCenter = BarCenter();

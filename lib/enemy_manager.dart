@@ -25,8 +25,8 @@ class EnemyManager extends Component with HasGameRef<DinoGame> {
     Vector2 center =  Vector2(gameRef.size.x/2, 0);
     Vector2 left =  Vector2(gameRef.size.x -(gameRef.size.x *0.8) , 0);
     Vector2 right =  Vector2(gameRef.size.x -(gameRef.size.x * 0.2) , 0);
-    int rand = random.nextInt(5);
-    print(rand);
+    int rand = random.nextInt(2);
+    // print(rand);
     int randomSprite = random.nextInt(5);
     Sprite? sprite = randomSprite != 0 ? await Sprite.load('Saw.png') :  await Sprite.load('Barrel (2).png');
 
@@ -36,6 +36,7 @@ class EnemyManager extends Component with HasGameRef<DinoGame> {
         size: initialSize,
         position: center,
       )..anchor = Anchor.center;
+
       gameRef.add(enemy);
     } else {
       Enemy enemyLeft = Enemy(

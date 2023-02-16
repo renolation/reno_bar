@@ -1,8 +1,11 @@
 
+import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:reno_bar/dino_game.dart';
 
-class BarCenter extends SpriteComponent with HasGameRef<DinoGame> {
+import 'enemy.dart';
+
+class BarCenter extends SpriteComponent with HasGameRef<DinoGame>, CollisionCallbacks {
   BarCenter() : super(size: Vector2.all(100), anchor: Anchor.center);
 
   @override
@@ -13,6 +16,33 @@ class BarCenter extends SpriteComponent with HasGameRef<DinoGame> {
     position = Vector2(gameRef.size.x /2, gameRef.size.y * 11 / 15);
 
   }
+
+  @override
+  void onMount() {
+    super.onMount();
+    final shape = CircleHitbox.relative(1,  parentSize: size,
+      position: size / 2,
+      anchor: Anchor.center,);
+    add(shape);
+  }
+
+  @override
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
+    if(other is Enemy){
+      print('touch 2');
+    }
+  }
+
+  @override
+  void onCollisionEnd(PositionComponent other) {
+    super.onCollisionEnd(other);
+    if (other is ScreenHitbox) {
+      //...
+    }
+  }
+
+
 }
 
 
