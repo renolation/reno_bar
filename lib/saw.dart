@@ -6,13 +6,15 @@ import 'package:flutter/material.dart';
 import 'package:reno_bar/bar_center.dart';
 import 'package:reno_bar/dino_game.dart';
 
-class Enemy extends SpriteComponent with HasGameRef<DinoGame>, CollisionCallbacks {
-  double _speed = 250;
+class Saw extends SpriteComponent with HasGameRef<DinoGame>, CollisionCallbacks {
+  double _speed = 350;
 
-  Enemy({
+  final bool isBarrel;
+  Saw( {
     Sprite? sprite,
     Vector2? position,
     Vector2? size,
+    required this.isBarrel,
   }) : super(sprite: sprite, position: position, size: size);
 
   @override
@@ -24,8 +26,6 @@ class Enemy extends SpriteComponent with HasGameRef<DinoGame>, CollisionCallback
     }
   }
 
-
-
   @override
   void onMount() {
     super.onMount();
@@ -36,26 +36,20 @@ class Enemy extends SpriteComponent with HasGameRef<DinoGame>, CollisionCallback
   }
 
 
-  // @override
-  // void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-  //   super.onCollision(intersectionPoints, other);
-  //
-  // }
-
-
   @override
-  void onCollisionStart(
-      Set<Vector2> intersectionPoints, PositionComponent other) {
-    super.onCollisionStart(intersectionPoints, other);
-    if(other is BarCenter){
+  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+    super.onCollision(intersectionPoints, other);
+    if(other is BarCenter ||other is BarLeft || other is BarRight){
       removeFromParent();
-      print('touch 22');
+      // print('touch 22');
     }
   }
+
+
 
   @override
   void onRemove() {
     super.onRemove();
-    // print('removed');
+    print('removed');
   }
 }

@@ -8,7 +8,7 @@ import 'package:flame/game.dart';
 import 'package:reno_bar/bar_center.dart';
 import 'package:reno_bar/dino_player.dart';
 import 'package:reno_bar/dino_world.dart';
-import 'package:reno_bar/enemy.dart';
+import 'package:reno_bar/saw.dart';
 import 'package:reno_bar/enemy_manager.dart';
 
 class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
@@ -28,9 +28,7 @@ class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
     await add(dinoPlayer);
     await add(barLeft);
     await add(barRight);
-
-
-
+    
     camera.followComponent(
       dinoPlayer,
       worldBounds: Rect.fromLTRB(0, 0, dinoWorld.size.x, dinoWorld.size.y),
