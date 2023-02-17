@@ -14,9 +14,10 @@ import 'package:reno_bar/enemy_manager.dart';
 class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
   final DinoPlayer dinoPlayer = DinoPlayer();
   final DinoWorld dinoWorld = DinoWorld();
-   final BarCenter barCenter = BarCenter();
-   final BarLeft barLeft = BarLeft();
-   final BarRight barRight = BarRight();
+  late final BarCenter barLeft;
+  late final BarCenter barRight;
+  late final BarCenter barCenter;
+
 
   late EnemyManager _enemyManager;
 
@@ -26,9 +27,27 @@ class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
     super.onLoad();
     await add(dinoWorld);
     await add(dinoPlayer);
+
+
+    barLeft = BarCenter(
+        await loadSprite('Tile (1).png'),
+        Vector2(size.x - (size.x / 10 * 9), size.y * 11 / 15)
+    );
     await add(barLeft);
+
+
+    barRight = BarCenter(
+        await loadSprite('Tile (3).png'),
+        Vector2((size.x / 10 * 9), size.y * 11 / 15)
+    );
     await add(barRight);
-    
+
+    barCenter = BarCenter(
+        await loadSprite('Tile (15).png'),
+        Vector2(size.x /2, size.y * 11 / 15)
+    );
+
+
     camera.followComponent(
       dinoPlayer,
       worldBounds: Rect.fromLTRB(0, 0, dinoWorld.size.x, dinoWorld.size.y),

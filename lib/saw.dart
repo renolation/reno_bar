@@ -39,7 +39,7 @@ class Saw extends SpriteComponent with HasGameRef<DinoGame>, CollisionCallbacks 
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollision(intersectionPoints, other);
-    if(other is BarCenter ||other is BarLeft || other is BarRight){
+    if(other is BarCenter){
       removeFromParent();
       // print('touch 22');
     }
