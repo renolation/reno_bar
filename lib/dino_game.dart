@@ -30,20 +30,20 @@ class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
 
 
     barLeft = BarCenter(
-        await loadSprite('Tile (1).png'),
+        await loadSprite('bar_left.png'),
         Vector2(size.x - (size.x / 10 * 9), size.y * 11 / 15)
     );
     await add(barLeft);
 
 
     barRight = BarCenter(
-        await loadSprite('Tile (3).png'),
+        await loadSprite('bar_right.png'),
         Vector2((size.x / 10 * 9), size.y * 11 / 15)
     );
     await add(barRight);
 
     barCenter = BarCenter(
-        await loadSprite('Tile (15).png'),
+        await loadSprite('bar_center.png'),
         Vector2(size.x /2, size.y * 11 / 15)
     );
 

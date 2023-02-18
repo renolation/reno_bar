@@ -13,7 +13,7 @@ class BarCenter extends SpriteComponent with HasGameRef<DinoGame>, CollisionCall
   Future<void> onLoad() async {
     super.onLoad();
     // sprite = await gameRef.loadSprite('Tile (15).png');
-    // position = Vector2(gameRef.size.x /2, gameRef.size.y * 11 / 15);
+    size = Vector2(150, 50);
 
   }
 
