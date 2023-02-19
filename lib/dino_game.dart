@@ -32,66 +32,76 @@ class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
   final _commandList = List<Command>.empty(growable: true);
   final _addLaterCommandList = List<Command>.empty(growable: true);
 
+  bool _isAlreadyLoaded = false;
+
+
   @override
   Future<void> onLoad() async {
     super.onLoad();
-    await add(dinoWorld);
-    await add(_dinoPlayer);
+    if(!_isAlreadyLoaded){
+      await add(dinoWorld);
+      await add(_dinoPlayer);
 
 
-    barLeft = BarCenter(
-        await loadSprite('bar_left.png'),
-        Vector2(size.x - (size.x / 10 * 9), size.y * 11 / 15)
-    );
-    await add(barLeft);
+      barLeft = BarCenter(
+          await loadSprite('bar_left.png'),
+          Vector2(size.x - (size.x / 10 * 9), size.y * 11 / 15)
+      );
+      await add(barLeft);
 
 
-    barRight = BarCenter(
-        await loadSprite('bar_right.png'),
-        Vector2((size.x / 10 * 9), size.y * 11 / 15)
-    );
-    await add(barRight);
+      barRight = BarCenter(
+          await loadSprite('bar_right.png'),
+          Vector2((size.x / 10 * 9), size.y * 11 / 15)
+      );
+      await add(barRight);
 
-    barCenter = BarCenter(
-        await loadSprite('bar_center.png'),
-        Vector2(size.x /2, size.y * 11 / 15)
-    );
-
-
-    camera.followComponent(
-      _dinoPlayer,
-      worldBounds: Rect.fromLTRB(0, 0, dinoWorld.size.x, dinoWorld.size.y),
-    );
-    _enemyManager = EnemyManager();
-    add(_enemyManager);
+      barCenter = BarCenter(
+          await loadSprite('bar_center.png'),
+          Vector2(size.x /2, size.y * 11 / 15)
+      );
 
 
+      camera.followComponent(
+        _dinoPlayer,
+        worldBounds: Rect.fromLTRB(0, 0, dinoWorld.size.x, dinoWorld.size.y),
+      );
+      _enemyManager = EnemyManager();
+      add(_enemyManager);
 
-    //region score
-    _playerScore = TextComponent(text: 'Score :0',
-      position: Vector2(10, 40),
-      textRenderer: TextPaint(
-      style: const TextStyle(
-        color: Colors.white,
-        fontSize: 12,
-      ),
-    ),);
-    _playerScore.positionType = PositionType.viewport;
-    add(_playerScore);
 
-    _playerHealth = TextComponent(text: 'Health :0',
-      position: Vector2(size.x - 10, 40),
-      textRenderer: TextPaint(
-        style: const TextStyle(
-          color: Colors.white,
-          fontSize: 12,
-        ),
-      ),);
-    _playerHealth.anchor = Anchor.topRight;
-    _playerHealth.positionType = PositionType.viewport;
 
-    add(_playerHealth);
-    //endregion
+      //region score
+      _playerScore = TextComponent(text: 'Score :0',
+        position: Vector2(10, 40),
+        textRenderer: TextPaint(
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 12,
+          ),
+        ),);
+      _playerScore.positionType = PositionType.viewport;
+      add(_playerScore);
+
+      _playerHealth = TextComponent(text: 'Health :0',
+        position: Vector2(size.x - 10, 40),
+        textRenderer: TextPaint(
+          style: const TextStyle(
+            color: Colors.white,
+            fontSize: 12,
+          ),
+        ),);
+      _playerHealth.anchor = Anchor.topRight;
+      _playerHealth.positionType = PositionType.viewport;
+
+      add(_playerHealth);
+      //endregion
+
+      // Set this to true so that we do not initilize
+      // everything again in the same session.
+      _isAlreadyLoaded = true;
+    }
+
 
 
   }
@@ -158,5 +168,13 @@ class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
     _addLaterCommandList.add(command);
   }
 
+  void reset(){
+    _dinoPlayer.reset();
+    _enemyManager.reset();
+
+    children.whereType<Saw>().forEach((element) {
+      element.removeFromParent();
+    });
+  }
 
 }

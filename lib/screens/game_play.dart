@@ -1,5 +1,7 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:reno_bar/widgets/overlays/pause_button.dart';
+import 'package:reno_bar/widgets/overlays/pause_menu.dart';
 
 import '../dino_game.dart';
  DinoGame _dinoGame = DinoGame();
@@ -9,8 +11,16 @@ class GamePlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: ()async => false,
-        child: GameWidget(game: _dinoGame));
+    return Scaffold(
+      body: WillPopScope(
+          onWillPop: ()async => false,
+          child: GameWidget(game: _dinoGame,
+            initialActiveOverlays: const [PauseButton.id],
+            overlayBuilderMap: {
+            PauseButton.id:(BuildContext context, DinoGame gameRef) => PauseButton(gameRef: gameRef),
+             PauseMenu.id: (BuildContext context, DinoGame gameRef) => PauseMenu(gameRef: gameRef),
+            },
+          )),
+    );
   }
 }

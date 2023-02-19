@@ -41,4 +41,8 @@ class DinoPlayer extends SpriteComponent with HasGameRef<DinoGame>, Tappable {
     _score += point;
   }
 
+  void reset() {
+   _score = 0;
+  }
+
 }
