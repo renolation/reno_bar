@@ -11,7 +11,8 @@ import 'dino_game.dart';
 class DinoPlayer extends SpriteComponent with HasGameRef<DinoGame>, Tappable {
 
   DinoPlayer() : super(anchor: Anchor.bottomCenter);
-
+  int score = 0;
+  int health = 100;
  @override
   Future<void> onLoad() async {
    super.onLoad();

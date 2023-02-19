@@ -1,10 +1,12 @@
 import 'dart:ui';
-
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
 import 'package:flame/experimental.dart';
 import 'package:flame/game.dart';
+import 'package:flame/text.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:reno_bar/bar_center.dart';
 import 'package:reno_bar/dino_player.dart';
 import 'package:reno_bar/dino_world.dart';
@@ -20,6 +22,11 @@ class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
 
 
   late EnemyManager _enemyManager;
+
+  late TextComponent _playerHealth;
+  late TextComponent _playerScore;
+
+
 
 
   @override
@@ -54,8 +61,54 @@ class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
     );
     _enemyManager = EnemyManager();
     add(_enemyManager);
+
+
+
+    //region score
+    _playerScore = TextComponent(text: 'Score :0',
+      position: Vector2(10, 40),
+      textRenderer: TextPaint(
+      style: const TextStyle(
+        color: Colors.white,
+        fontSize: 12,
+      ),
+    ),);
+    _playerScore.positionType = PositionType.viewport;
+    _playerScore.is
+    add(_playerScore);
+
+    _playerHealth = TextComponent(text: 'Health :0',
+      position: Vector2(size.x - 10, 40),
+      textRenderer: TextPaint(
+        style: const TextStyle(
+          color: Colors.white,
+          fontSize: 12,
+        ),
+      ),);
+    _playerHealth.anchor = Anchor.topRight;
+    _playerHealth.positionType = PositionType.viewport;
+
+    add(_playerHealth);
+    //endregion
+
+
   }
 
+
+  @override
+  void update(double dt) {
+    super.update(dt);
+    _playerScore.text = 'Score ${dinoPlayer.score}';
+    _playerHealth.text = 'Health ${dinoPlayer.health}';
+  }
+
+
+  @override
+  void render(Canvas canvas) {
+    super.render(canvas);
+    canvas.drawRect(Rect.fromLTWH(size.x-80, 40, dinoPlayer.health.toDouble(), 20), Paint()..color = Colors.green.withOpacity(0.9));
+
+  }
 
   @override
   void onTapUp(int pointerId, TapUpInfo info) {
@@ -89,32 +142,6 @@ class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
   }
 
 
-  // @override
-  // void onTapDown(TapDownEvent event) {
-  //   super.onTapDown(event);
-  //   RemoveEffect effect = RemoveEffect(delay: 0);
-  //   if(!children.contains(_barCenter)){
-  //     add(_barCenter);
-  //   }
-  //   if((children.contains(_barLeft) || children.contains(_barRight))){
-  //     barLeft.add(RemoveEffect(delay: 0));
-  //     barRight.add(RemoveEffect(delay: 0));
-  //   }
-  //
-  // }
-  //
-  // @override
-  // void onTapUp(TapUpEvent event) {
-  //   super.onTapUp(event);
-  //
-  //   if(children.contains(_barCenter)){
-  //     barCenter.add(RemoveEffect(delay: 0));
-  //   }
-  //
-  //   if(!(children.contains(_barLeft) || children.contains(_barRight))){
-  //     add(_barLeft);
-  //     add(_barRight);
-  //   }
-  // }
+
 
 }

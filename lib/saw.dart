@@ -5,6 +5,7 @@ import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:reno_bar/bar_center.dart';
 import 'package:reno_bar/dino_game.dart';
+import 'package:reno_bar/dino_player.dart';
 
 class Saw extends SpriteComponent with HasGameRef<DinoGame>, CollisionCallbacks {
   double _speed = 350;
@@ -39,9 +40,14 @@ class Saw extends SpriteComponent with HasGameRef<DinoGame>, CollisionCallbacks 
   @override
   void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
     super.onCollision(intersectionPoints, other);
-    if(other is BarCenter){
+    if(other is BarCenter || other is DinoPlayer){
       removeFromParent();
-      print('touch 22');
+      if(!isBarrel){
+        gameRef.dinoPlayer.score +=1;
+      } else {
+        gameRef.camera.shake(intensity: 1, duration: 0.15);
+        print('game over');
+      }
     }
   }
 

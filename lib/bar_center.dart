@@ -9,6 +9,7 @@ import 'saw.dart';
 class BarCenter extends SpriteComponent with HasGameRef<DinoGame>, CollisionCallbacks {
   BarCenter(Sprite sprite, Vector2 position) : super(sprite: sprite, position: position ,size: Vector2.all(100), anchor: Anchor.center);
 
+
   @override
   Future<void> onLoad() async {
     super.onLoad();
@@ -32,9 +33,12 @@ class BarCenter extends SpriteComponent with HasGameRef<DinoGame>, CollisionCall
     if(other is Saw){
       if(other.isBarrel){
         print('lose');
+        gameRef.dinoPlayer.health -= 10;
+        if(gameRef.dinoPlayer.health < 0){
+          gameRef.dinoPlayer.health = 0;
+        }
       } else {
-        print('+1');
-        print('touch 2');
+        // gameRef.dinoPlayer.score +=1;
       }
     }
   }
