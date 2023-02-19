@@ -13,8 +13,10 @@ import 'package:reno_bar/dino_world.dart';
 import 'package:reno_bar/saw.dart';
 import 'package:reno_bar/enemy_manager.dart';
 
+import 'command.dart';
+
 class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
-  final DinoPlayer dinoPlayer = DinoPlayer();
+  final DinoPlayer _dinoPlayer = DinoPlayer();
   final DinoWorld dinoWorld = DinoWorld();
   late final BarCenter barLeft;
   late final BarCenter barRight;
@@ -27,13 +29,14 @@ class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
   late TextComponent _playerScore;
 
 
-
+  final _commandList = List<Command>.empty(growable: true);
+  final _addLaterCommandList = List<Command>.empty(growable: true);
 
   @override
   Future<void> onLoad() async {
     super.onLoad();
     await add(dinoWorld);
-    await add(dinoPlayer);
+    await add(_dinoPlayer);
 
 
     barLeft = BarCenter(
@@ -56,7 +59,7 @@ class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
 
 
     camera.followComponent(
-      dinoPlayer,
+      _dinoPlayer,
       worldBounds: Rect.fromLTRB(0, 0, dinoWorld.size.x, dinoWorld.size.y),
     );
     _enemyManager = EnemyManager();
@@ -74,7 +77,6 @@ class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
       ),
     ),);
     _playerScore.positionType = PositionType.viewport;
-    _playerScore.is
     add(_playerScore);
 
     _playerHealth = TextComponent(text: 'Health :0',
@@ -98,15 +100,26 @@ class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
   @override
   void update(double dt) {
     super.update(dt);
-    _playerScore.text = 'Score ${dinoPlayer.score}';
-    _playerHealth.text = 'Health ${dinoPlayer.health}';
+
+    for (var command in _commandList) {
+      for (var component in children) {
+        command.run(component);
+      }
+    }
+    _commandList.clear();
+    _commandList.addAll(_addLaterCommandList);
+    _addLaterCommandList.clear();
+
+    _playerScore.text = 'Score ${_dinoPlayer.score}';
+    _playerHealth.text = 'Health ${_dinoPlayer.health}';
+
   }
 
 
   @override
   void render(Canvas canvas) {
     super.render(canvas);
-    canvas.drawRect(Rect.fromLTWH(size.x-80, 40, dinoPlayer.health.toDouble(), 20), Paint()..color = Colors.green.withOpacity(0.9));
+    canvas.drawRect(Rect.fromLTWH(size.x-80, 40, _dinoPlayer.health.toDouble(), 20), Paint()..color = Colors.green.withOpacity(0.9));
 
   }
 
@@ -141,7 +154,9 @@ class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
 
   }
 
-
+  void addCommand(Command command){
+    _addLaterCommandList.add(command);
+  }
 
 
 }

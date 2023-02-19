@@ -32,11 +32,12 @@ class BarCenter extends SpriteComponent with HasGameRef<DinoGame>, CollisionCall
     super.onCollision(intersectionPoints, other);
     if(other is Saw){
       if(other.isBarrel){
+        //todo: lose
         print('lose');
-        gameRef.dinoPlayer.health -= 10;
-        if(gameRef.dinoPlayer.health < 0){
-          gameRef.dinoPlayer.health = 0;
-        }
+        // gameRef.dinoPlayer.health -= 10;
+        // if(gameRef.dinoPlayer.health < 0){
+        //   gameRef.dinoPlayer.health = 0;
+        // }
       } else {
         // gameRef.dinoPlayer.score +=1;
       }

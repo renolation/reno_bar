@@ -4,6 +4,7 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:reno_bar/bar_center.dart';
+import 'package:reno_bar/command.dart';
 import 'package:reno_bar/dino_game.dart';
 import 'package:reno_bar/dino_player.dart';
 
@@ -43,7 +44,11 @@ class Saw extends SpriteComponent with HasGameRef<DinoGame>, CollisionCallbacks 
     if(other is BarCenter || other is DinoPlayer){
       removeFromParent();
       if(!isBarrel){
-        gameRef.dinoPlayer.score +=1;
+        // gameRef.dinoPlayer.score +=1;
+        final command = Command<DinoPlayer>(action: (dinoPlayer){
+          dinoPlayer.addToScore(1);
+        });
+        gameRef.addCommand(command);
       } else {
         gameRef.camera.shake(intensity: 1, duration: 0.15);
         print('game over');
