@@ -3,6 +3,8 @@ import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:reno_bar/dino_game.dart';
 
+import 'command.dart';
+import 'dino_player.dart';
 import 'saw.dart';
 
 
@@ -33,11 +35,8 @@ class BarCenter extends SpriteComponent with HasGameRef<DinoGame>, CollisionCall
     if(other is Saw){
       if(other.isBarrel){
         //todo: lose
-        print('lose');
-        // gameRef.dinoPlayer.health -= 10;
-        // if(gameRef.dinoPlayer.health < 0){
-        //   gameRef.dinoPlayer.health = 0;
-        // }
+
+
       } else {
         // gameRef.dinoPlayer.score +=1;
       }

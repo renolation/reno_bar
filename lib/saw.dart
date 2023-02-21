@@ -10,7 +10,7 @@ import 'package:reno_bar/dino_player.dart';
 
 class Saw extends SpriteComponent with HasGameRef<DinoGame>, CollisionCallbacks {
   double _speed = 350;
-
+  int time = 0;
   final bool isBarrel;
   Saw( {
     Sprite? sprite,
@@ -43,15 +43,23 @@ class Saw extends SpriteComponent with HasGameRef<DinoGame>, CollisionCallbacks 
     super.onCollision(intersectionPoints, other);
     if(other is BarCenter || other is DinoPlayer){
       removeFromParent();
-      if(!isBarrel){
-        // gameRef.dinoPlayer.score +=1;
-        final command = Command<DinoPlayer>(action: (dinoPlayer){
-          dinoPlayer.addToScore(1);
-        });
-        gameRef.addCommand(command);
-      } else {
-        gameRef.camera.shake(intensity: 1, duration: 0.15);
-        print('game over');
+      time++;
+      print(time);
+      if(time<=1){
+        if(!isBarrel){
+          final command = Command<DinoPlayer>(action: (dinoPlayer){
+            dinoPlayer.addToScore(1);
+          });
+          gameRef.addCommand(command);
+        } else {
+          final command = Command<DinoPlayer>(action: (dinoPlayer){
+            dinoPlayer.removeHealth(10);
+          });
+          gameRef.addCommand(command);
+          // gameRef.camera.shake(intensity: 1, duration: 0.15);
+          print('game over');
+        }
+
       }
     }
   }

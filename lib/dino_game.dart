@@ -12,8 +12,11 @@ import 'package:reno_bar/dino_player.dart';
 import 'package:reno_bar/dino_world.dart';
 import 'package:reno_bar/saw.dart';
 import 'package:reno_bar/enemy_manager.dart';
+import 'package:reno_bar/widgets/overlays/game_over_menu.dart';
 
 import 'command.dart';
+import 'widgets/overlays/pause_button.dart';
+import 'widgets/overlays/pause_menu.dart';
 
 class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
   final DinoPlayer _dinoPlayer = DinoPlayer();
@@ -123,6 +126,12 @@ class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
     _playerScore.text = 'Score ${_dinoPlayer.score}';
     _playerHealth.text = 'Health ${_dinoPlayer.health}';
 
+    if(_dinoPlayer.health <= 0 && !camera.shaking){
+        pauseEngine();
+        overlays.remove(PauseButton.id);
+        overlays.add(GameOverMenu.id);
+    }
+
   }
 
 
@@ -162,6 +171,27 @@ class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
 
     }
 
+  }
+
+
+  @override
+  void lifecycleStateChange(AppLifecycleState state) {
+    switch(state){
+
+      case AppLifecycleState.resumed:
+        break;
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+
+      case AppLifecycleState.detached:
+        if(_dinoPlayer.health > 0){
+          pauseEngine();
+          overlays.remove(PauseButton.id);
+          overlays.add(PauseMenu.id);
+        }
+        break;
+    }
+    super.lifecycleStateChange(state);
   }
 
   void addCommand(Command command){

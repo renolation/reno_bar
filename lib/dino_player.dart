@@ -13,7 +13,7 @@ class DinoPlayer extends SpriteComponent with HasGameRef<DinoGame>, Tappable {
   DinoPlayer() : super(anchor: Anchor.bottomCenter);
    int _score = 0;
   int get score => _score;
-   int _health = 100;
+   int _health = 10;
   int get health => _health;
  @override
   Future<void> onLoad() async {
@@ -41,8 +41,13 @@ class DinoPlayer extends SpriteComponent with HasGameRef<DinoGame>, Tappable {
     _score += point;
   }
 
+  void removeHealth(int point){
+   _health -= point;
+  }
+
   void reset() {
    _score = 0;
+   _health = 10;
   }
 
 }

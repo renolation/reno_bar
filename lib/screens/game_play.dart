@@ -1,5 +1,6 @@
 import 'package:flame/game.dart';
 import 'package:flutter/material.dart';
+import 'package:reno_bar/widgets/overlays/game_over_menu.dart';
 import 'package:reno_bar/widgets/overlays/pause_button.dart';
 import 'package:reno_bar/widgets/overlays/pause_menu.dart';
 
@@ -19,6 +20,7 @@ class GamePlay extends StatelessWidget {
             overlayBuilderMap: {
             PauseButton.id:(BuildContext context, DinoGame gameRef) => PauseButton(gameRef: gameRef),
              PauseMenu.id: (BuildContext context, DinoGame gameRef) => PauseMenu(gameRef: gameRef),
+             GameOverMenu.id: (BuildContext context, DinoGame gameRef) => GameOverMenu(gameRef: gameRef),
             },
           )),
     );
