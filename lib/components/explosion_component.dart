@@ -1,5 +1,5 @@
 import 'package:flame/components.dart';
-import 'package:reno_bar/dino_game.dart';
+import 'package:reno_bar/game/dino_game.dart';
 
 /// An explosion from https://ansimuz.itch.io/explosion-animations-pack.
 class ExplosionComponent extends SpriteAnimationComponent

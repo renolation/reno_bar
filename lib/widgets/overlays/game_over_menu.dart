@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reno_bar/dino_game.dart';
+import 'package:reno_bar/game/dino_game.dart';
 
 import '../../screens/main_menu.dart';
 import 'pause_button.dart';

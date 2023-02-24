@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:reno_bar/widgets/overlays/pause_menu.dart';
 
-import '../../dino_game.dart';
+import '../../game/dino_game.dart';
 
 class PauseButton extends StatelessWidget {
   static const String id = 'PauseButton';

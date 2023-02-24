@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:flame/components.dart';
 import 'package:flame/sprite.dart';
-import 'package:reno_bar/dino_game.dart';
+import 'package:reno_bar/game/dino_game.dart';
 
-import 'saw.dart';
+import './saw.dart';
 
 class EnemyManager extends Component with HasGameRef<DinoGame> {
   late Timer timer;

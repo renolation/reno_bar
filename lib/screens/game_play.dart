@@ -4,7 +4,7 @@ import 'package:reno_bar/widgets/overlays/game_over_menu.dart';
 import 'package:reno_bar/widgets/overlays/pause_button.dart';
 import 'package:reno_bar/widgets/overlays/pause_menu.dart';
 
-import '../dino_game.dart';
+import '../game/dino_game.dart';
  DinoGame _dinoGame = DinoGame();
 
 class GamePlay extends StatelessWidget {

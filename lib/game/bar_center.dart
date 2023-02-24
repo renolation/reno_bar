@@ -1,11 +1,10 @@
 
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
-import 'package:reno_bar/dino_game.dart';
+import 'package:reno_bar/game/dino_game.dart';
 
 import 'command.dart';
-import 'dino_player.dart';
-import 'saw.dart';
+import './saw.dart';
 
 
 class BarCenter extends SpriteComponent with HasGameRef<DinoGame>, CollisionCallbacks {

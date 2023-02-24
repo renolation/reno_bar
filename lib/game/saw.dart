@@ -3,12 +3,12 @@
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
-import 'package:reno_bar/bar_center.dart';
-import 'package:reno_bar/command.dart';
-import 'package:reno_bar/dino_game.dart';
-import 'package:reno_bar/dino_player.dart';
+import 'package:reno_bar/game/bar_center.dart';
+import 'package:reno_bar/game/command.dart';
+import 'package:reno_bar/game/dino_game.dart';
+import '../components/explosion_component.dart';
+import './dino_player.dart';
 
-import 'components/explosion_component.dart';
 
 class Saw extends SpriteComponent with HasGameRef<DinoGame>, CollisionCallbacks {
   double _speed = 350;

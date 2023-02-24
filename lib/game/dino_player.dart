@@ -4,9 +4,10 @@ import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
 import 'package:flame/experimental.dart';
-import 'package:reno_bar/bar_center.dart';
+import 'package:reno_bar/game/bar_center.dart';
 
 import 'dino_game.dart';
+
 
 class DinoPlayer extends SpriteComponent with HasGameRef<DinoGame>, Tappable {
 

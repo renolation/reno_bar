@@ -7,16 +7,17 @@ import 'package:flame/game.dart';
 import 'package:flame/text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
-import 'package:reno_bar/bar_center.dart';
-import 'package:reno_bar/dino_player.dart';
-import 'package:reno_bar/dino_world.dart';
-import 'package:reno_bar/saw.dart';
-import 'package:reno_bar/enemy_manager.dart';
+import 'package:reno_bar/game/bar_center.dart';
+import './dino_player.dart';
+import 'package:reno_bar/game/dino_world.dart';
+import './saw.dart';
+import 'package:reno_bar/game/enemy_manager.dart';
 import 'package:reno_bar/widgets/overlays/game_over_menu.dart';
 
 import 'command.dart';
-import 'widgets/overlays/pause_button.dart';
-import 'widgets/overlays/pause_menu.dart';
+import '../widgets/overlays/pause_button.dart';
+import '../widgets/overlays/pause_menu.dart';
+import 'dino_player.dart';
 
 class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
   final DinoPlayer _dinoPlayer = DinoPlayer();
