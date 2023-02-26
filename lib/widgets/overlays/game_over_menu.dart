@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:reno_bar/game/dino_game.dart';
 
+import '../../game/command.dart';
+import '../../game/dino_player.dart';
 import '../../screens/main_menu.dart';
 import 'pause_button.dart';
 
@@ -33,6 +35,22 @@ class GameOverMenu extends StatelessWidget {
                   )
                 ],
               ),
+            ),
+          ),
+
+          //Resume button
+          SizedBox(
+            width: MediaQuery.of(context).size.width / 3,
+            child: ElevatedButton(
+              onPressed: () {
+
+                gameRef.dinoPlayer.addLife(5);
+                gameRef.resumeEngine();
+                gameRef.overlays.remove(GameOverMenu.id);
+                gameRef.overlays.add(PauseButton.id);
+
+              },
+              child: const Text('Resume'),
             ),
           ),
 

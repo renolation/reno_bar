@@ -20,7 +20,8 @@ import '../widgets/overlays/pause_menu.dart';
 import 'dino_player.dart';
 
 class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
-  final DinoPlayer _dinoPlayer = DinoPlayer();
+  final DinoPlayer dinoPlayer = DinoPlayer();
+
   final DinoWorld dinoWorld = DinoWorld();
   late final BarCenter barLeft;
   late final BarCenter barRight;
@@ -44,7 +45,7 @@ class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
     super.onLoad();
     if(!_isAlreadyLoaded){
       await add(dinoWorld);
-      await add(_dinoPlayer);
+      await add(dinoPlayer);
 
 
       barLeft = BarCenter(
@@ -67,7 +68,7 @@ class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
 
 
       camera.followComponent(
-        _dinoPlayer,
+        dinoPlayer,
         worldBounds: Rect.fromLTRB(0, 0, dinoWorld.size.x, dinoWorld.size.y),
       );
       _enemyManager = EnemyManager();
@@ -124,22 +125,21 @@ class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
     _commandList.addAll(_addLaterCommandList);
     _addLaterCommandList.clear();
 
-    _playerScore.text = 'Score ${_dinoPlayer.score}';
-    _playerHealth.text = 'Health ${_dinoPlayer.health}';
+    _playerScore.text = 'Score ${dinoPlayer.score}';
+    _playerHealth.text = 'Life ${dinoPlayer.life}';
 
-    if(_dinoPlayer.health <= 0 && !camera.shaking){
+    if(dinoPlayer.life <= 0 && !camera.shaking){
         pauseEngine();
         overlays.remove(PauseButton.id);
         overlays.add(GameOverMenu.id);
     }
-
   }
 
 
   @override
   void render(Canvas canvas) {
     super.render(canvas);
-    canvas.drawRect(Rect.fromLTWH(size.x-80, 40, _dinoPlayer.health.toDouble(), 20), Paint()..color = Colors.green.withOpacity(0.9));
+    // canvas.drawRect(Rect.fromLTWH(size.x-80, 40, _dinoPlayer.health.toDouble(), 20), Paint()..color = Colors.green.withOpacity(0.9));
 
   }
 
@@ -185,7 +185,7 @@ class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
       case AppLifecycleState.paused:
 
       case AppLifecycleState.detached:
-        if(_dinoPlayer.health > 0){
+        if(dinoPlayer.life > 0){
           pauseEngine();
           overlays.remove(PauseButton.id);
           overlays.add(PauseMenu.id);
@@ -200,7 +200,7 @@ class DinoGame extends FlameGame with HasTappables, HasCollisionDetection {
   }
 
   void reset(){
-    _dinoPlayer.reset();
+    dinoPlayer.reset();
     _enemyManager.reset();
 
     children.whereType<Saw>().forEach((element) {
