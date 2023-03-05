@@ -11,7 +11,7 @@ class PlayerData with _$PlayerData  {
   @HiveType(typeId: 0, adapterName: 'PlayerDataAdapter')
   const factory PlayerData({
     @HiveField(0)
-    required int topScore,
+    required int score,
 
     @HiveField(1)
     required int life,

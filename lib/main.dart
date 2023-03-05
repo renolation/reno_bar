@@ -22,8 +22,7 @@ void main() async {
   //region hive
   await Hive.initFlutter();
   Hive.registerAdapter(PlayerDataAdapter());
-  var box = await Hive.openBox('mainApp');
-
+  await Hive.openBox('mainApp');
   runApp(
      ProviderScope(
       overrides: [

@@ -17,7 +17,7 @@ class PlayerDataAdapter extends TypeAdapter<_$_PlayerData> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return _$_PlayerData(
-      topScore: fields[0] as int,
+      score: fields[0] as int,
       life: fields[1] as int,
       highScore: (fields[2] as List).cast<int>(),
     );
@@ -28,7 +28,7 @@ class PlayerDataAdapter extends TypeAdapter<_$_PlayerData> {
     writer
       ..writeByte(3)
       ..writeByte(0)
-      ..write(obj.topScore)
+      ..write(obj.score)
       ..writeByte(1)
       ..write(obj.life)
       ..writeByte(2)
@@ -52,7 +52,7 @@ class PlayerDataAdapter extends TypeAdapter<_$_PlayerData> {
 
 _$_PlayerData _$$_PlayerDataFromJson(Map<String, dynamic> json) =>
     _$_PlayerData(
-      topScore: json['topScore'] as int,
+      score: json['score'] as int,
       life: json['life'] as int,
       highScore:
           (json['highScore'] as List<dynamic>).map((e) => e as int).toList(),
@@ -60,7 +60,7 @@ _$_PlayerData _$$_PlayerDataFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$_PlayerDataToJson(_$_PlayerData instance) =>
     <String, dynamic>{
-      'topScore': instance.topScore,
+      'score': instance.score,
       'life': instance.life,
       'highScore': instance.highScore,
     };

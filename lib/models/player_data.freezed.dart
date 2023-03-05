@@ -21,7 +21,7 @@ PlayerData _$PlayerDataFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$PlayerData {
   @HiveField(0)
-  int get topScore => throw _privateConstructorUsedError;
+  int get score => throw _privateConstructorUsedError;
   @HiveField(1)
   int get life => throw _privateConstructorUsedError;
   @HiveField(2)
@@ -40,7 +40,7 @@ abstract class $PlayerDataCopyWith<$Res> {
       _$PlayerDataCopyWithImpl<$Res, PlayerData>;
   @useResult
   $Res call(
-      {@HiveField(0) int topScore,
+      {@HiveField(0) int score,
       @HiveField(1) int life,
       @HiveField(2) List<int> highScore});
 }
@@ -58,14 +58,14 @@ class _$PlayerDataCopyWithImpl<$Res, $Val extends PlayerData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? topScore = null,
+    Object? score = null,
     Object? life = null,
     Object? highScore = null,
   }) {
     return _then(_value.copyWith(
-      topScore: null == topScore
-          ? _value.topScore
-          : topScore // ignore: cast_nullable_to_non_nullable
+      score: null == score
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
               as int,
       life: null == life
           ? _value.life
@@ -88,7 +88,7 @@ abstract class _$$_PlayerDataCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@HiveField(0) int topScore,
+      {@HiveField(0) int score,
       @HiveField(1) int life,
       @HiveField(2) List<int> highScore});
 }
@@ -104,14 +104,14 @@ class __$$_PlayerDataCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? topScore = null,
+    Object? score = null,
     Object? life = null,
     Object? highScore = null,
   }) {
     return _then(_$_PlayerData(
-      topScore: null == topScore
-          ? _value.topScore
-          : topScore // ignore: cast_nullable_to_non_nullable
+      score: null == score
+          ? _value.score
+          : score // ignore: cast_nullable_to_non_nullable
               as int,
       life: null == life
           ? _value.life
@@ -130,7 +130,7 @@ class __$$_PlayerDataCopyWithImpl<$Res>
 @HiveType(typeId: 0, adapterName: 'PlayerDataAdapter')
 class _$_PlayerData implements _PlayerData {
   const _$_PlayerData(
-      {@HiveField(0) required this.topScore,
+      {@HiveField(0) required this.score,
       @HiveField(1) required this.life,
       @HiveField(2) required final List<int> highScore})
       : _highScore = highScore;
@@ -140,7 +140,7 @@ class _$_PlayerData implements _PlayerData {
 
   @override
   @HiveField(0)
-  final int topScore;
+  final int score;
   @override
   @HiveField(1)
   final int life;
@@ -155,7 +155,7 @@ class _$_PlayerData implements _PlayerData {
 
   @override
   String toString() {
-    return 'PlayerData(topScore: $topScore, life: $life, highScore: $highScore)';
+    return 'PlayerData(score: $score, life: $life, highScore: $highScore)';
   }
 
   @override
@@ -163,8 +163,7 @@ class _$_PlayerData implements _PlayerData {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PlayerData &&
-            (identical(other.topScore, topScore) ||
-                other.topScore == topScore) &&
+            (identical(other.score, score) || other.score == score) &&
             (identical(other.life, life) || other.life == life) &&
             const DeepCollectionEquality()
                 .equals(other._highScore, _highScore));
@@ -172,7 +171,7 @@ class _$_PlayerData implements _PlayerData {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, topScore, life,
+  int get hashCode => Object.hash(runtimeType, score, life,
       const DeepCollectionEquality().hash(_highScore));
 
   @JsonKey(ignore: true)
@@ -191,7 +190,7 @@ class _$_PlayerData implements _PlayerData {
 
 abstract class _PlayerData implements PlayerData {
   const factory _PlayerData(
-      {@HiveField(0) required final int topScore,
+      {@HiveField(0) required final int score,
       @HiveField(1) required final int life,
       @HiveField(2) required final List<int> highScore}) = _$_PlayerData;
 
@@ -200,7 +199,7 @@ abstract class _PlayerData implements PlayerData {
 
   @override
   @HiveField(0)
-  int get topScore;
+  int get score;
   @override
   @HiveField(1)
   int get life;

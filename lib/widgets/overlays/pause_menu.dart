@@ -1,9 +1,11 @@
 
 
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:reno_bar/game/dino_game.dart';
 import 'package:reno_bar/widgets/overlays/pause_button.dart';
 
+import '../../models/player_data.dart';
 import '../../screens/main_menu.dart';
 
 class PauseMenu extends StatelessWidget {
@@ -54,7 +56,26 @@ class PauseMenu extends StatelessWidget {
           SizedBox(
             width: MediaQuery.of(context).size.width / 3,
             child: ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
+                var mainApp = await Hive.openBox('mainApp');
+                if(mainApp.containsKey('player_data')){
+                  PlayerData data = mainApp.get('player_data');
+                  List<int> highScore = List.from(data.highScore);
+                  highScore.add(gameRef.dinoPlayer.score);
+                  data.copyWith(
+                      score: gameRef.dinoPlayer.score,
+                      life: gameRef.dinoPlayer.life,
+                      highScore: highScore
+                  );
+                  print(data.toString());
+                  mainApp.put('player_data', data);
+                }
+                else {
+                  PlayerData data = PlayerData(score: gameRef.dinoPlayer.score, life: gameRef.dinoPlayer.life, highScore: []);
+                  print(data.toString());
+                  mainApp.put('player_data', data);
+                }
+
                 gameRef.overlays.remove(PauseMenu.id);
                 gameRef.overlays.add(PauseButton.id);
                 gameRef.reset();

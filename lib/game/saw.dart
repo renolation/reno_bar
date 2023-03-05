@@ -48,27 +48,33 @@ class Saw extends SpriteComponent with HasGameRef<DinoGame>, CollisionCallbacks 
       time++;
       print(time);
       if(time<=1){
-
         if(!isBarrel){
           final command = Command<DinoPlayer>(action: (dinoPlayer){
             dinoPlayer.addToScore(1);
           });
           gameRef.addCommand(command);
+          gameRef.add(
+              ExplosionComponent(
+                position.clone()
+                  ..add(
+                    Vector2(size.x, 20),
+                  ),
+                angle: -angle,
+              ));
         } else {
+
+          gameRef.add(
+              ExplosionComponent(
+                position.clone()
+                  ..add(
+                    Vector2(size.x, 0),
+                  ),
+                angle: -angle,
+              ));
+          gameRef.camera.shake(intensity: 1, duration: 0.15);
+
           final command = Command<DinoPlayer>(action: (dinoPlayer){
             dinoPlayer.removeLife(1);
-            if(dinoPlayer.life < 1){
-              gameRef.add(
-                  ExplosionComponent(
-                    position.clone()
-                      ..add(
-                        Vector2(size.x, 0),
-                      ),
-                    angle: -angle,
-                  ));
-              gameRef.camera.shake(intensity: 1, duration: 0.15);
-              print('game over');
-            }
           });
           gameRef.addCommand(command);
 

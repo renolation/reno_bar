@@ -14,7 +14,7 @@ class DinoPlayer extends SpriteComponent with HasGameRef<DinoGame>, Tappable {
   DinoPlayer() : super(anchor: Anchor.bottomCenter);
    int _score = 0;
   int get score => _score;
-   int _life = 1;
+   int _life = 10;
   int get life => _life;
  @override
   Future<void> onLoad() async {

@@ -1,5 +1,6 @@
 import 'package:appwrite/appwrite.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:reno_bar/providers/appwrite_provider.dart';
 import 'package:reno_bar/screens/game_play.dart';
@@ -19,6 +20,15 @@ class MainMenu extends HookConsumerWidget {
               Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) =>const GamePlay()));
             }, child: const Text('Play')),
             ElevatedButton(onPressed: () async {
+
+              var mainApp = await Hive.openBox('mainApp');
+              if(mainApp.containsKey('player_data')){
+                print('true');
+                print(mainApp.get('player_data').toString());
+              } else {
+                print('false');
+              }
+
               // Account account = Account(clientProvider);
               //
               // final user = await account.create(

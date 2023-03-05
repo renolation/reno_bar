@@ -16,7 +16,6 @@ class EnemyManager extends Component with HasGameRef<DinoGame> {
 
   Future<void> _spawnEnemy() async {
     Vector2 initialSize = Vector2(64, 64);
-
     Vector2 center = Vector2(gameRef.size.x / 2, 0);
     Vector2 left = Vector2(gameRef.size.x - (gameRef.size.x * 0.8), 0);
     Vector2 right = Vector2(gameRef.size.x - (gameRef.size.x * 0.2), 0);
@@ -26,10 +25,10 @@ class EnemyManager extends Component with HasGameRef<DinoGame> {
     bool? isBarrel;
     // Sprite? sprite =  ? await Sprite.load('Saw.png') :  await Sprite.load('Barrel (2).png');
     if (randomSprite != 0) {
-      sprite = await Sprite.load('Saw.png');
+      sprite = await Sprite.load('egg.png');
       isBarrel = false;
     } else {
-      sprite = await Sprite.load('Barrel (2).png');
+      sprite = await Sprite.load('egg-bomb.png');
       isBarrel= true;
     }
     if (rand != 0) {

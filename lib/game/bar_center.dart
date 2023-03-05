@@ -1,6 +1,9 @@
 
+import 'dart:ui';
+
 import 'package:flame/collisions.dart';
 import 'package:flame/components.dart';
+import 'package:flutter/material.dart';
 import 'package:reno_bar/game/dino_game.dart';
 
 import 'command.dart';
@@ -49,6 +52,13 @@ class BarCenter extends SpriteComponent with HasGameRef<DinoGame>, CollisionCall
       //...
     }
   }
+
+    @override
+    void render(Canvas canvas) {
+    super.render(canvas);
+      canvas.drawRect(size.toRect(), Paint()..color = Colors.white);
+    }
+
 
 
 }
