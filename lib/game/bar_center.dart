@@ -31,27 +31,27 @@ class BarCenter extends SpriteComponent with HasGameRef<DinoGame>, CollisionCall
     add(shape);
   }
 
-  @override
-  void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
-    super.onCollision(intersectionPoints, other);
-    if(other is Saw){
-      if(other.isBarrel){
-        //todo: lose
-
-
-      } else {
-        // gameRef.dinoPlayer.score +=1;
-      }
-    }
-  }
-
-  @override
-  void onCollisionEnd(PositionComponent other) {
-    super.onCollisionEnd(other);
-    if (other is ScreenHitbox) {
-      //...
-    }
-  }
+  // @override
+  // void onCollision(Set<Vector2> intersectionPoints, PositionComponent other) {
+  //   super.onCollision(intersectionPoints, other);
+  //   if(other is Saw){
+  //     if(other.isBarrel){
+  //       //todo: lose
+  //
+  //
+  //     } else {
+  //       // gameRef.dinoPlayer.score +=1;
+  //     }
+  //   }
+  // }
+  //
+  // @override
+  // void onCollisionEnd(PositionComponent other) {
+  //   super.onCollisionEnd(other);
+  //   if (other is ScreenHitbox) {
+  //     //...
+  //   }
+  // }
 
     @override
     void render(Canvas canvas) {
